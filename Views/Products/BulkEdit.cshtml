@@ -1,0 +1,66 @@
+﻿
+@model List<Product>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <span>Id</span>
+            </th>
+            <th>
+                <span>Type</span>
+            </th>
+            <th>
+                <span>Name</span>
+            </th>
+            <th>
+                <span>Description</span>
+            </th>
+            <th>
+                <span>Price</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <form asp-action="BulkEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+ 
+                <tr>
+
+                    <td>
+                        <input asp-for="@Model[i].Id" class="form-control" readonly />
+                        <span asp-validation-for="@Model[i].Id" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <select asp-for="@Model[i].Type" asp-items="Html.GetEnumSelectList<Product.Category>()" disabled></select>
+                        <input type="hidden" asp-for="@Model[i].Type" />
+                        <span asp-validation-for="@Model[i].Type" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input asp-for="@Model[i].Name" class="form-control" readonly />
+                        <span asp-validation-for="@Model[i].Name" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input asp-for="@Model[i].Description" class="form-control" readonly />
+                        <span asp-validation-for="@Model[i].Description" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input asp-for="@Model[i].Price" class="form-control" />
+                        <span asp-validation-for="@Model[i].Price" class="text-danger"></span>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+
+                </td>
+            </tr>
+        </form>
+    </tbody>
+</table>
